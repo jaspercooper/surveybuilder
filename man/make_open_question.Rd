@@ -8,6 +8,8 @@ make_open_question(question_prompt, concat = F)
 }
 \arguments{
 \item{question_prompt}{The main text of the question.}
+
+\item{concat}{Logical argument: should the text be concatenated and printed using cat(), i.e. for sinking directly to .tex files.}
 }
 \value{
 An open survey question.

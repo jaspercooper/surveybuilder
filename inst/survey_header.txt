@@ -1,0 +1,7 @@
+\documentclass[12pt,fleqn]{scrreprt}
+
+\usepackage[ngerman]{babel}
+\usepackage[top=2.5cm,bottom=2.5cm,left=2.5cm,right=2.5cm]{geometry}
+\usepackage[latin1]{inputenc}
+\usepackage{paperandpencil}
+

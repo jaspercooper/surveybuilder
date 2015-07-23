@@ -1,0 +1,4 @@
+\begin{document}
+\pagenumbering{arabic}
+  \setcounter{page}{1}
+  \addtocounter{section}{1}

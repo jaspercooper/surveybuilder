@@ -5,7 +5,7 @@
 \title{Create a question.}
 \usage{
 make_question(question_prompt, type = "open", answer_categories = NULL,
-  comment = NULL)
+  comment = NULL, enumerator_instructions = NULL)
 }
 \arguments{
 \item{question_prompt}{The main text of the question.}
