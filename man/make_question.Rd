@@ -4,8 +4,7 @@
 \alias{make_question}
 \title{Create a question.}
 \usage{
-make_question(question_prompt, type = "open", answer_categories = NULL,
-  comment = NULL, enumerator_instructions = NULL)
+make_question(question_type = "open", ...)
 }
 \arguments{
 \item{question_prompt}{The main text of the question.}
