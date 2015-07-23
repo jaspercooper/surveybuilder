@@ -14,7 +14,7 @@ make_survey <- function(...,output_file_path = NULL,N_surveys = NULL,survey_titl
     )
   }
 
-  if(length(ID)!=N_surveys){
+  if((!is.null(ID)&!is.null(N_surveys))&(!identical(length(ID),N_surveys))){
     stop("Your custom ID variable must be the same length as the number of surveys (N_surveys). It is better to specify only one of the two.")
   }
 
