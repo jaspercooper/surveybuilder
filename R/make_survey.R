@@ -169,7 +169,7 @@ compile_survey_object <-
     message(paste0("PDFs output to ",output_file_path))
 
   }
-
+cat(thing)
 
 #' @export
 question_list_to_string <- function(...) {

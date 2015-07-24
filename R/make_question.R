@@ -200,10 +200,10 @@ make_numeric_question <-
     responses <- ""
 
     for (i in 1:length(labels)) {
-      responses <- paste0(responses,"$ ",paste0(rep("\\bbox",
+      responses <- paste0(responses," $ ",paste0(rep("\\bbox",
                                                     N_boxes[i]),collapse = "")," $ ",labels[i]," ")
     }
-    responses <- paste0("$\\hfill$",responses," $\\hspace{",cm_from_right,"cm}$")
+    responses <- paste0(" $\\hfill$ ",responses," $\\hspace{",cm_from_right,"cm}$ ")
 
     full_question <- paste0(question, " \n ",responses)
 
