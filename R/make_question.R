@@ -5,10 +5,13 @@
 #' @return A survey question
 #' @export
 make_question <-
-  function(question_type = "open",...){
+  function(question_type,...){
+    if(missing(question_type)){
+      stop("Please choose the type of question you want to make: 'open','horizontal','vertical', 'prompt', or 'numeric'. See make_open_question(), make_horizontal_question(), make_vertical_question(), make_numeric_question(), and make_prompt() for more information on the functionality of each question type.")
+    }
 
-    if(!question_type%in%c("open","horizontal","vertical","numeric")){
-      stop("make_question() can only make questions of type 'open','horizontal','vertical', or 'numeric'.")
+    if(!question_type%in%c("open","horizontal","vertical","numeric","prompt")){
+      stop("make_question() can only make questions of type 'open','horizontal','vertical', 'prompt', or 'numeric'.")
     }
 
     if(question_type=="open"){
@@ -25,6 +28,10 @@ make_question <-
 
     if(question_type=="numeric"){
       question <- make_numeric_question(...)
+    }
+
+    if(question_type=="prompt"){
+      question <- make_prompt(...)
     }
 
     return(question)
@@ -206,4 +213,21 @@ make_numeric_question <-
       return(full_question)
     }
   }
+
+
+#' Create a prompt
+#'
+#' @param prompt The non-question prompt or LaTeX formatting
+#' @return A prompt.
+#' @export
+make_prompt <-
+  function(prompt = NULL,concat = F) {
+    return(prompt)
+  }
+
+
+
+
+
+
 
