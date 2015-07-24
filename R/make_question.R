@@ -182,7 +182,7 @@ make_vertical_question <- function(question_prompt = NULL,comment = NULL,labels 
 #' @examples make_open_question("How are you?")
 #' @export
 make_numeric_question <-
-  function(question_prompt = NULL,comment = NULL,labels = NULL,N_boxes = 2,cm_from_right = 4,concat = F) {
+  function(question_prompt = NULL,comment = NULL,labels = NULL,N_boxes = 2,cm_from_left = 8,concat = F) {
     if (!is.null(question_prompt)) {
       s_question <- paste0("\\question{{",question_prompt,"}")
       if (!is.null(comment)) {
@@ -203,7 +203,7 @@ make_numeric_question <-
       responses <- paste0(responses," $ ",paste0(rep("\\bbox",
                                                     N_boxes[i]),collapse = "")," $ ",labels[i]," ")
     }
-    responses <- paste0(" $\\hfill$ ",responses," $\\hspace{",cm_from_right,"cm}$ ")
+    responses <- paste0(" $\\hspace{",cm_from_left,"cm}$ ",responses," $\\hfill$ ")
 
     full_question <- paste0(question, " \n ",responses)
 
