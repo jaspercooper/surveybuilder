@@ -5,7 +5,7 @@
 \title{Create a numerical box question}
 \usage{
 make_numeric_question(question_prompt = NULL, comment = NULL,
-  quantity_labels = NULL, N_boxes = 2, cm_from_right = 4, concat = F)
+  labels = NULL, N_boxes = 2, cm_from_right = 4, concat = F)
 }
 \arguments{
 \item{question_prompt}{The main text of the question.}

@@ -182,7 +182,7 @@ make_vertical_question <- function(question_prompt = NULL,comment = NULL,labels 
 #' @examples make_open_question("How are you?")
 #' @export
 make_numeric_question <-
-  function(question_prompt = NULL,comment = NULL,quantity_labels = NULL,N_boxes = 2,cm_from_right = 4,concat = F) {
+  function(question_prompt = NULL,comment = NULL,labels = NULL,N_boxes = 2,cm_from_right = 4,concat = F) {
     if (!is.null(question_prompt)) {
       s_question <- paste0("\\question{{",question_prompt,"}")
       if (!is.null(comment)) {
@@ -193,15 +193,15 @@ make_numeric_question <-
       question <- NULL
     }
 
-    if (length(N_boxes) != length(quantity_labels)) {
-      stop("N_boxes and quantity_labels should be vectors of the same length.")
+    if (length(N_boxes) != length(labels)) {
+      stop("N_boxes and labels should be vectors of the same length.")
     }
 
     responses <- ""
 
-    for (i in 1:length(quantity_labels)) {
+    for (i in 1:length(labels)) {
       responses <- paste0(responses,"$ ",paste0(rep("\\bbox",
-                                                    N_boxes[i]),collapse = "")," $ ",quantity_labels[i]," ")
+                                                    N_boxes[i]),collapse = "")," $ ",labels[i]," ")
     }
     responses <- paste0("$\\hfill$",responses," $\\hspace{",cm_from_right,"cm}$")
 
