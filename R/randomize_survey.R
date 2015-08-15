@@ -37,7 +37,8 @@ randomize_survey <- function(...,output_file_path = NULL,question_combinations =
 
   # Generate question list --------------------------------------------------
 
-  questions <- question_list_to_string(...)
+  question_list <- question_list_to_string(...)
+
 
   # Transform combination matrix to list ------------------------------------
 
