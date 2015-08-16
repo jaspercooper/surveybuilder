@@ -124,7 +124,8 @@ make_horizontal_question <- function(question_prompt = NULL,comment = NULL,upper
   lower_s <- paste0("\\down",number,"{",paste(lower_labels,collapse = "}{"),"}")
   upper_s <- paste0("\\up",number,"{",paste(upper_labels,collapse = "}{"),"}")
 
-  horizontal <- paste0(horizontal_s,"{",lower_s,"} \n {",upper_s,"}")
+  # horizontal <- paste0(horizontal_s,"{",lower_s,"} \n {",upper_s,"}")
+  horizontal <- paste0(horizontal_s,"{",upper_s,"} \n {",lower_s,"}")
 
   full_question <- paste0(question, " \n ",horizontal)
 
