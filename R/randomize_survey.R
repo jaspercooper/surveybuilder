@@ -13,6 +13,10 @@ randomize_survey <- function(...,output_file_path = NULL,question_combinations =
 
   # Warnings and errors -----------------------------------------------------
 
+  if(any(grepl(pattern = "~",x = output_file_path))){
+    stop("Please remove '~/' and put the full file path into output_file_path")
+  }
+
   if (!any(class(question_combinations) %in% c("list","matrix","data.frame"))) {
     stop(
       "The question_combinations should be in either list, matrix or data.frame form, with unique question combinations as elements of a list, or columns of a matrix or data.frame."
