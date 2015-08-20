@@ -7,11 +7,11 @@
 make_question <-
   function(question_type,...){
     if(missing(question_type)){
-      stop("Please choose the type of question you want to make: 'open','horizontal','vertical', 'prompt', or 'numeric'. See make_open_question(), make_horizontal_question(), make_vertical_question(), make_numeric_question(), and make_prompt() for more information on the functionality of each question type.")
+      stop("Please choose the type of question you want to make: 'open','horizontal','vertical', 'prompt', 'grid' or 'numeric'. See make_open_question(), make_horizontal_question(), make_vertical_question(), make_grid_question(), make_numeric_question(), and make_prompt() for more information on the functionality of each question type.")
     }
 
-    if(!question_type%in%c("open","horizontal","vertical","numeric","prompt")){
-      stop("make_question() can only make questions of type 'open','horizontal','vertical', 'prompt', or 'numeric'.")
+    if(!question_type%in%c("open","horizontal","vertical","numeric","prompt","grid")){
+      stop("make_question() can only make questions of type 'open','horizontal','vertical', 'prompt', 'grid', or 'numeric'.")
     }
 
     if(question_type=="open"){
@@ -32,6 +32,10 @@ make_question <-
 
     if(question_type=="prompt"){
       question <- make_prompt(...)
+    }
+
+    if(question_type=="grid"){
+      question <- make_grid_question(...)
     }
 
     return(question)
@@ -228,7 +232,49 @@ make_prompt <-
 
 
 
+#' Create a grid of multiple choice questions
+#'
+#' @param question_prompt The main text of the question.
+#' @param concat Logical argument: should the text be concatenated and printed using cat(), i.e. for sinking directly to .tex files.
+#' @return An open survey question.
+#' @examples make_open_question("How are you?")
+#' @export
+make_grid_question <- function(question_prompt = NULL,comment = NULL,vertical_labels = NULL,horizontal_labels = NULL,concat = F){
 
+  vertical_labels[is.na(vertical_labels)] <- ""
+  horizontal_labels[is.na(horizontal_labels)] <- ""
 
+  N_vertical <- length(vertical_labels)
+  N_horizontal <- length(horizontal_labels)
 
+  if(!is.null(question_prompt)){
+    s_question <- paste0("\\question{{",question_prompt,"}")
+    if(!is.null(comment)){
+      s_question <- paste0(s_question," \\\\",comment)
+    }
+    question <- paste0(s_question,"}")
+  }else{question <- NULL}
 
+  number <- numbers2words(N_horizontal)
+
+  grid_s <- paste0(
+    "\\vertikalblock",number,"{",
+    paste(
+      horizontal_labels,collapse = "}{"
+    ),"}{ \n")
+  grid_m <- paste0(
+    rep(paste0("\\blocktext",number,"{"),N_vertical),
+    vertical_labels,
+    "} \n")
+  grid_e <- "}"
+
+  grid_questions <- paste0(grid_s,paste(grid_m,collapse = ""),grid_e)
+
+  full_question <- paste0(question," \n ", grid_questions)
+
+  if(concat){
+    return(cat(full_question))
+  }else{
+    return(full_question)
+  }
+}
