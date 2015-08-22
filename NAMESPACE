@@ -3,7 +3,6 @@
 export(compile_survey_object)
 export(make_grid_question)
 export(make_horizontal_question)
-export(make_module)
 export(make_numeric_question)
 export(make_open_question)
 export(make_prompt)
