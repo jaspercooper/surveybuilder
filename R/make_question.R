@@ -227,6 +227,7 @@ make_numeric_question <-
 #' @export
 make_prompt <-
   function(prompt = NULL,concat = F) {
+    if(concat)return(cat(prompt))
     return(prompt)
   }
 
