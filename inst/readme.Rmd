@@ -1,10 +1,3 @@
----
-title: "readme for surveybuilder"
-author: "Author One and Author Two"
-date: "August 22, 2015"
-output: html_document
----
-
 # surveybuilder: Make Surveys and Randomized Survey Experiments in R
 
 `surveybuilder` is a package for creating surveys in PDF format using R, 
