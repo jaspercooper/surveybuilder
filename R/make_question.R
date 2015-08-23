@@ -51,7 +51,7 @@ make_question <-
 #' @return An open survey question.
 #' @examples make_open_question("How are you?")
 #' @export
-make_open_question <- function(question_prompt,comment = NULL,concat = F,N_lines = NULL, N_dot_lines = NULL){
+make_open_question <- function(question_prompt,comment = NULL,concat = F,N_lines = NULL, N_dot_lines = NULL,image_path = NULL,...){
 
   if(!is.null(N_lines)&!is.null(N_dot_lines)){
     stop("You should supply an argument to N_lines or to N_dot_lines, not to both.")
@@ -75,6 +75,11 @@ make_open_question <- function(question_prompt,comment = NULL,concat = F,N_lines
     question <- paste0(question," \n ",n_dot_lines)
   }
 
+  if(!is.null(image_path)){
+    question <- paste0(question,"\n",
+                       insert_image(image_path = image_path,...))
+  }
+
 
   if(concat){
     return(cat(question))
@@ -91,7 +96,7 @@ make_open_question <- function(question_prompt,comment = NULL,concat = F,N_lines
 #' @return An open survey question.
 #' @examples make_open_question("How are you?")
 #' @export
-make_horizontal_question <- function(question_prompt = NULL,comment = NULL,upper_labels = NULL,lower_labels = NULL,concat = F){
+make_horizontal_question <- function(question_prompt = NULL,comment = NULL,upper_labels = NULL,lower_labels = NULL,concat = F,image_path = NULL,...){
 
   if(all(sapply(c(lower_labels,upper_labels),is.null))){
     stop("You must specify either lower or upper labels.")
@@ -133,6 +138,11 @@ make_horizontal_question <- function(question_prompt = NULL,comment = NULL,upper
 
   full_question <- paste0(question, " \n ",horizontal)
 
+  if(!is.null(image_path)){
+    full_question <- paste0(full_question,"\n",
+                       insert_image(image_path = image_path,...))
+  }
+
   if(concat){
     return(cat(full_question))
   }else{
@@ -148,7 +158,7 @@ make_horizontal_question <- function(question_prompt = NULL,comment = NULL,upper
 #' @return An open survey question.
 #' @examples make_open_question("How are you?")
 #' @export
-make_vertical_question <- function(question_prompt = NULL,comment = NULL,labels = NULL,concat = F){
+make_vertical_question <- function(question_prompt = NULL,comment = NULL,labels = NULL,concat = F,image_path = NULL,...){
 
   labels[is.na(labels)] <- ""
 
@@ -187,7 +197,7 @@ make_vertical_question <- function(question_prompt = NULL,comment = NULL,labels 
 #' @examples make_open_question("How are you?")
 #' @export
 make_numeric_question <-
-  function(question_prompt = NULL,comment = NULL,labels = NULL,N_boxes = 2,cm_from_left = 8,concat = F) {
+  function(question_prompt = NULL,comment = NULL,labels = NULL,N_boxes = 2,cm_from_left = 8,concat = F,image_path = NULL) {
     if (!is.null(question_prompt)) {
       s_question <- paste0("\\question{{",question_prompt,"}")
       if (!is.null(comment)) {
@@ -211,6 +221,11 @@ make_numeric_question <-
     responses <- paste0(" $\\hspace{",cm_from_left,"cm}$ ",responses," $\\hfill$ ")
 
     full_question <- paste0(question, " \n ",responses)
+
+    if(!is.null(image_path)){
+      full_question <- paste0(full_question,"\n",
+                              insert_image(image_path = image_path,...))
+    }
 
     if (concat) {
       return(cat(full_question))
@@ -240,7 +255,7 @@ make_prompt <-
 #' @return An open survey question.
 #' @examples make_open_question("How are you?")
 #' @export
-make_grid_question <- function(question_prompt = NULL,comment = NULL,vertical_labels = NULL,horizontal_labels = NULL,concat = F){
+make_grid_question <- function(question_prompt = NULL,comment = NULL,vertical_labels = NULL,horizontal_labels = NULL,concat = F,image_path = NULL,...){
 
   vertical_labels[is.na(vertical_labels)] <- ""
   horizontal_labels[is.na(horizontal_labels)] <- ""
@@ -272,6 +287,11 @@ make_grid_question <- function(question_prompt = NULL,comment = NULL,vertical_la
   grid_questions <- paste0(grid_s,paste(grid_m,collapse = ""),grid_e)
 
   full_question <- paste0(question," \n ", grid_questions)
+
+  if(!is.null(image_path)){
+    full_question <- paste0(full_question,"\n",
+                            insert_image(image_path = image_path,...))
+  }
 
   if(concat){
     return(cat(full_question))
