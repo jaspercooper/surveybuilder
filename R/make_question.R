@@ -136,7 +136,7 @@ make_horizontal_question <- function(question_prompt = NULL,comment = NULL,upper
   # horizontal <- paste0(horizontal_s,"{",lower_s,"} \n {",upper_s,"}")
   horizontal <- paste0(horizontal_s,"{",upper_s,"} \n {",lower_s,"}")
 
-  full_question <- paste0(question, " \n ",horizontal)
+  full_question <- paste0(question, " \\vspace{-5mm} \n ",horizontal,"\\vspace{-5mm}")
 
   if(!is.null(image_path)){
     full_question <- paste0(full_question,"\n",
