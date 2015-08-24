@@ -5,7 +5,8 @@
 \title{Create a horizontal multiple choice question}
 \usage{
 make_horizontal_question(question_prompt = NULL, comment = NULL,
-  upper_labels = NULL, lower_labels = NULL, concat = F)
+  upper_labels = NULL, lower_labels = NULL, concat = F,
+  image_path = NULL, ...)
 }
 \arguments{
 \item{question_prompt}{The main text of the question.}

@@ -197,7 +197,7 @@ make_vertical_question <- function(question_prompt = NULL,comment = NULL,labels 
 #' @examples make_open_question("How are you?")
 #' @export
 make_numeric_question <-
-  function(question_prompt = NULL,comment = NULL,labels = NULL,N_boxes = 2,cm_from_left = 8,concat = F,image_path = NULL) {
+  function(question_prompt = NULL,comment = NULL,labels = NULL,N_boxes = 2,cm_from_left = 8,concat = F,image_path = NULL,...) {
     if (!is.null(question_prompt)) {
       s_question <- paste0("\\question{{",question_prompt,"}")
       if (!is.null(comment)) {

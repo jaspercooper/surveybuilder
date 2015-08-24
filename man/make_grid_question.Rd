@@ -5,7 +5,8 @@
 \title{Create a grid of multiple choice questions}
 \usage{
 make_grid_question(question_prompt = NULL, comment = NULL,
-  vertical_labels = NULL, horizontal_labels = NULL, concat = F)
+  vertical_labels = NULL, horizontal_labels = NULL, concat = F,
+  image_path = NULL, ...)
 }
 \arguments{
 \item{question_prompt}{The main text of the question.}

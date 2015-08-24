@@ -5,7 +5,7 @@
 \title{Create a vertical multiple choice question}
 \usage{
 make_vertical_question(question_prompt = NULL, comment = NULL,
-  labels = NULL, concat = F)
+  labels = NULL, concat = F, image_path = NULL, ...)
 }
 \arguments{
 \item{question_prompt}{The main text of the question.}

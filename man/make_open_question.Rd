@@ -5,7 +5,7 @@
 \title{Create an open question.}
 \usage{
 make_open_question(question_prompt, comment = NULL, concat = F,
-  N_lines = NULL, N_dot_lines = NULL)
+  N_lines = NULL, N_dot_lines = NULL, image_path = NULL, ...)
 }
 \arguments{
 \item{question_prompt}{The main text of the question.}
