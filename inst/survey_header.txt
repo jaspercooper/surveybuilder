@@ -5,3 +5,4 @@
 \usepackage[latin1]{inputenc}
 \usepackage{paperandpencil}
 \usepackage{graphicx}
+\usepackage{placeins}

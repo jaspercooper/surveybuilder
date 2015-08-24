@@ -78,7 +78,7 @@ insert_image <- function(image_path,caption = NULL,float_environment = "h!",imag
     "\\includegraphics[width=",image_width,"]{",image_path,"} \n",
     caption_below, "\n",
     alignment,"\n",
-    "\\end{figure} \n"
+    "\\end{figure} \n \\FloatBarrier"
   )
 
   if(concat){
