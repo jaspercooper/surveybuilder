@@ -32,7 +32,9 @@ make_survey <- function(...,output_file_path = NULL,N_surveys = NULL,survey_titl
 
   # Generate question list --------------------------------------------------
 
-  questions <- question_list_to_string(...)
+  question_list <- make_question_list(...)
+
+  questions <- question_list_to_string(question_list)
 
   surveys <- lapply(1:N_surveys,function(i) {
     id <- ID[i]
@@ -170,21 +172,35 @@ compile_survey_object <-
 
   }
 
-
 #' @export
-question_list_to_string <- function(...) {
+make_question_list <- function(...){
   question_list <- list(...)
 
   if (length(question_list) == 1 &
       class(question_list[[1]]) == "list") {
         question_list <- question_list[[1]]
       }
+  return(question_list)
+}
+
+#' @export
+question_list_to_string <- function(question_list) {
+
+
+  random_scheme <- get_randomization_scheme(question_list)
+
+  question_names <- get_names(question_list = question_list,
+                                  random_scheme = random_scheme,
+                                  as_list = FALSE)
 
   questions <- unlist(question_list)
+  names(questions) <- question_names
+
   class(questions) <- "questions"
   return(questions)
 
 }
+
 
 
 #' @export
@@ -203,3 +219,68 @@ make_survey_object <- function(ID,survey_title,questions) {
   class(survey) <- "survey"
   return(survey)
 }
+
+
+
+
+
+
+
+#' @export
+check_list_structure <-  function(question_list){
+
+  question_classes <- sapply(question_list,class)
+
+  if(any(!question_classes %in% c("character","list"))){
+    stop("All questions must be either in character format (for non-randomized questions) or in list format (for randomized questions).")
+  }
+
+  more_than_one <- sapply(question_list,length)>1
+
+  too_many_levels <- sapply(1:length(more_than_one),function(i){
+    if(more_than_one[i]){
+      any(!sapply(question_list[[i]],class)  %in%  "character")
+    }else{
+      FALSE
+    }
+  })
+
+  if(any(too_many_levels)){
+    stop("The list of questions should only contain two levels: the first should contain either questions (of 'character' class) or lists of questions; the second should contain a vector of questions to be randomized (also in 'character' class)")
+  }
+
+}
+
+#' @export
+get_randomization_scheme <- function(question_list){
+  check_list_structure(question_list)
+  sapply(question_list,class)=="list"
+}
+
+
+
+#' @export
+get_names <- function(question_list,random_scheme,as_list = TRUE){
+  question_names <- names(question_list)
+  question_structure <- lapply(1:length(random_scheme),function(i){
+    if(random_scheme[i]){
+      random_names <- names(question_list[[i]])
+
+      if(is.null(random_names)){
+        random_names <- 1:length(question_list[[i]])
+      }
+
+      paste0(question_names[i],"_",random_names)
+    }else{
+      question_names[i]
+    }
+  })
+  if(as_list)return(question_structure)
+  return(unlist(question_structure))
+
+}
+
+
+
+
+

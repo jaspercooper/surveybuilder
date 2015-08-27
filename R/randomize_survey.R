@@ -11,10 +11,22 @@
 #' @export
 randomize_survey <- function(...,output_file_path = NULL,question_combinations = NULL,random_method = "simple",combination_probs = NULL,combination_sizes = NULL,N_surveys = NULL,survey_title = NULL,ID = NULL,compile_PDF = TRUE,store_tex = FALSE,page_numbers = TRUE){
 
+  # Generate question list --------------------------------------------------
+
+  question_list <- make_question_list(...)
+
+  questions <- question_list_to_string(question_list)
+
   # Warnings and errors -----------------------------------------------------
 
   if(any(grepl(pattern = "~",x = output_file_path))){
     stop("Please remove '~/' and put the full file path into output_file_path")
+  }
+
+  if(is.null(question_combinations)){
+    warning("You have not provided the combinations of questions to be randomized, so every possible combination of randomized and non-randomized questions will be generated.")
+    question_combinations <- get_permutations(question_list = question_list,
+                                              numeric_indicators = TRUE)
   }
 
   if (!any(class(question_combinations) %in% c("list","matrix","data.frame"))) {
@@ -39,9 +51,6 @@ randomize_survey <- function(...,output_file_path = NULL,question_combinations =
     stop("randomize_survey() only accepts 'simple', 'complete' and 'asis' as random_method.")
   }
 
-  # Generate question list --------------------------------------------------
-
-  question_list <- question_list_to_string(...)
 
 
   # Transform combination matrix to list ------------------------------------
