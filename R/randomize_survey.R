@@ -104,7 +104,7 @@ randomize_survey <- function(...,output_file_path = NULL,question_combinations =
 
     surveys <- lapply(1:length(combinations),function(i) {
       combination <- combinations[[i]]
-      questions <- unlist(question_list[combination])
+      questions <- unlist(question_list)[combination]
       id <- ID[i]
       survey <- make_survey_object(survey_title = survey_title,ID = id,questions = questions)
       return(survey)
@@ -127,7 +127,7 @@ randomize_survey <- function(...,output_file_path = NULL,question_combinations =
 
     surveys <- lapply(1:length(combinations),function(i) {
       combination <- combinations[[i]]
-      questions <- unlist(question_list[combination])
+      questions <- unlist(question_list)[combination]
       id <- ID[i]
       survey <- make_survey_object(survey_title = survey_title,ID = id,questions = questions)
       return(survey)
@@ -139,7 +139,7 @@ randomize_survey <- function(...,output_file_path = NULL,question_combinations =
   if(random_method == "asis"){
     surveys <- lapply(1:length(question_combinations),function(i) {
       combination <- question_combinations[[i]]
-      questions <- unlist(question_list[combination])
+      questions <- unlist(question_list)[combination]
       id <- ID[i]
       survey <- make_survey_object(survey_title = survey_title,ID = id,questions = questions)
       return(survey)
